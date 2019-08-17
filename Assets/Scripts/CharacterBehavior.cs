@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class CharacterBehavior : MonoBehaviour {    //캐릭터의 행동을 정의하는 스크립트 
 
-    private CharacterStat characterStat;
+    private CharacterStat characterStat;    //캐릭터 스텟 
     private GameManager gameManager;
 
     public GameObject bullet;
@@ -19,12 +19,13 @@ public class CharacterBehavior : MonoBehaviour {    //캐릭터의 행동을 정
         audioSource = gameObject.GetComponent<AudioSource>();
     }
 
-    public void attack(int damage)
+    public void attack(int damage)  //가장 핵심인 부분 실제로 총알이 발사되는 
     {
         animator.SetTrigger("Attack");
         audioSource.PlayOneShot(audioSource.clip);
         GameObject currentBullet = Instantiate(bullet, transform.position, Quaternion.identity);    //총알 객체 만든부분 
-        currentBullet.GetComponent<BulletBehavior>().setDamage(damage);
+        currentBullet.GetComponent<BulletBehavior>().bulletStat = new BulletStat(10+characterStat.level*3,characterStat.damage) ;
+        //객체지향 프로그래밍 기법 
     }
 	
 	void Update () {

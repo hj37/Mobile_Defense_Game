@@ -19,7 +19,7 @@ public class CharacterStat : MonoBehaviour {
         hp = hp - damage;
         if(hp <= 0)
         {
-            animator.SetTrigger("Die");
+            animator.SetTrigger("Die"); //애니메이션 Monobehavior 반드시 상속 받아야 함 
             Destroy(gameObject, 1.5f);
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
