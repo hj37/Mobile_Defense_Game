@@ -6,11 +6,8 @@ public class CreateMonster : MonoBehaviour {
 
     private GameManager gameManager;
 
-    public GameObject respawnSpot1;
-    public GameObject respawnSpot2;
-    public GameObject respawnSpot3;
-    public GameObject respawnSpot4;
-
+    public List<GameObject> respawnSpotList;
+    //list를 잘 지원하고 잇음 
     public GameObject monster1Prefab;
     public GameObject monster2Prefab;
 
@@ -34,24 +31,10 @@ public class CreateMonster : MonoBehaviour {
                 && spawnCount < gameManager.spawnNumber)
             {
                 lastSpawnTime = Time.time;
-                int respawnSpotNumber = Random.Range(1, 5);//문제점 배열을 이용해서 개선하게 될 것임 
-                GameObject respawnSpot = null;
-                if(respawnSpotNumber == 1)
-                {
-                    respawnSpot = respawnSpot1;
-                }
-                if (respawnSpotNumber == 2)
-                {
-                    respawnSpot = respawnSpot2;
-                }
-                if (respawnSpotNumber == 3)
-                {
-                    respawnSpot = respawnSpot3;
-                }
-                if (respawnSpotNumber == 4)
-                {
-                    respawnSpot = respawnSpot4;
-                }
+                int index = Random.Range(0, 4);
+                //문제점 배열을 이용해서 개선하게 될 것임 
+                GameObject respawnSpot = respawnSpotList[index];//리스폰 지역이 많을때는 매우 비효율적임 리스트로 해결할 수 있음 
+                //자료의 유형에 따라 어떤 자료구조가 좋을지 고민을 해보는게 중요함 
                 Instantiate(monsterPrefab, respawnSpot.transform.position, Quaternion.identity);
                 spawnCount += 1;
             }
