@@ -36,6 +36,7 @@ public class CreateMonster : MonoBehaviour {
                 GameObject respawnSpot = respawnSpotList[index];//리스폰 지역이 많을때는 매우 비효율적임 리스트로 해결할 수 있음 
                 //자료의 유형에 따라 어떤 자료구조가 좋을지 고민을 해보는게 중요함 
                 Instantiate(monsterPrefab, respawnSpot.transform.position, Quaternion.identity);
+                GameManager.instance.monsterAddCount++;
                 spawnCount += 1;
             }
             if(spawnCount == GameManager.instance.spawnNumber &&

@@ -41,6 +41,7 @@ public class CreateCharacter : MonoBehaviour {
             if(characterStat.canCreate(gameManager.seed))
             {
                 character = (GameObject)Instantiate(characterPrefab, transform.position, Quaternion.identity);
+                GameManager.instance.characterAddCount++;
                 audioSource.PlayOneShot(audioSource.clip);
                 gameManager.seed -= character.GetComponent<CharacterStat>().cost;
                 gameManager.updateText();
