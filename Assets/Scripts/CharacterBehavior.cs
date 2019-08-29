@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class CharacterBehavior : MonoBehaviour {    //캐릭터의 행동을 정의하는 스크립트 
 
     private CharacterStat characterStat;    //캐릭터 스텟 
-    private GameManager gameManager;
+   // private GameManager.instance GameManager.instance;
 
     public GameObject bullet;
     private Animator animator;
@@ -14,7 +14,7 @@ public class CharacterBehavior : MonoBehaviour {    //캐릭터의 행동을 정
     
 	void Start () {
         characterStat = gameObject.GetComponent<CharacterStat>();
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        //GameManager.instance = GameObject.Find("Game Manager").GetComponent<GameManager.instance>();
         animator = gameObject.GetComponent<Animator>();
         audioSource = gameObject.GetComponent<AudioSource>();
     }
@@ -36,11 +36,11 @@ public class CharacterBehavior : MonoBehaviour {    //캐릭터의 행동을 정
     {
         if (EventSystem.current.IsPointerOverGameObject(-1) == true) return;
         if (EventSystem.current.IsPointerOverGameObject(0) == true) return;
-        if (characterStat.canLevelUp(gameManager.seed))
+        if (characterStat.canLevelUp(GameManager.instance.seed))
         {
             characterStat.increaseLevel();
-            gameManager.seed -= characterStat.upgradeCost;
-            gameManager.updateText();
+            GameManager.instance.seed -= characterStat.upgradeCost;
+            GameManager.instance.updateText();
         }
     }
 }

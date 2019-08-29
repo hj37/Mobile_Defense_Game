@@ -5,6 +5,17 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager instance { get; set; }
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }//MonoBehaviour을 상속받을때는 Awake안에서 생성자를 초기화
+
     public Text seedText;
     public Text roundText;
     public Text roundStartText;
